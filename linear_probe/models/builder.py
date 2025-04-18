@@ -69,7 +69,7 @@ def get_encoder(model_name,which_img_norm='imagenet'):
     else:
         raise NotImplementedError('model {} not implemented'.format(model_name))
     
-    print(model)
+    # print(model)
     # constants = MODEL2CONSTANTS[model_name]
     eval_transform = get_eval_transforms(
         which_img_norm=which_img_norm,
