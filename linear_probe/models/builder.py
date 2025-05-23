@@ -61,10 +61,15 @@ def get_encoder(model_name,which_img_norm='imagenet'):
                                   pretrained=True)
     elif model_name == 'PanDerm':
         model = panderm_large_patch16_224()
-        checkpoint = torch.load(roo_path + 'panderm_ll_data6_checkpoint-499.pth', map_location='cpu')
-        state_dict = checkpoint['model']
+        state_dict = torch.load(roo_path + 'panderm_ll_data6_checkpoint-499.pth', map_location='cpu',weights_only=True)
         state_dict = {k.replace("encoder.", ""): v for k, v in state_dict.items()}
         model.load_state_dict(state_dict, strict=False)
+        
+        # model = panderm_large_patch16_224()
+        # checkpoint = torch.load(roo_path + 'panderm_ll_data6_checkpoint-499.pth', map_location='cpu')
+        # state_dict = checkpoint['model']
+        # state_dict = {k.replace("encoder.", ""): v for k, v in state_dict.items()}
+        # model.load_state_dict(state_dict, strict=False)
 
     else:
         raise NotImplementedError('model {} not implemented'.format(model_name))
